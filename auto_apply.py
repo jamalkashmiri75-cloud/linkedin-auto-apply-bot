@@ -3,8 +3,8 @@ import os, time, random, sys
 from playwright.sync_api import sync_playwright
 
 # Load credentials from GitHub Secrets / Environment
-EMAIL = os.getenv("LINKEDIN_EMAIL")
-PASSWORD = os.getenv("LINKEDIN_PASSWORD")
+EMAIL = os.getenv("jamalkashmiri52@gmail.com")
+PASSWORD = os.getenv("jamalch622")
 RESUME_PATH = os.getenv("RESUME_PATH", "resume.pdf")
 
 # Job categories (keywords)
@@ -137,3 +137,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
