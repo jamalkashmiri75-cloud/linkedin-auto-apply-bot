@@ -3,7 +3,7 @@ import os, time, random, sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-EMAIL = os.getenv("jamalkashmiri72@gmail.com")
+EMAIL = os.getenv("jamalkashmiri52@gmail.com")
 PASSWORD = os.getenv("jamalch622")
 RESUME_PATH = "resume.pdf"
 MAX_APPLIES = int(os.getenv("MAX_APPLIES_PER_RUN", "5"))
@@ -151,3 +151,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
