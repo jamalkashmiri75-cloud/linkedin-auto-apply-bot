@@ -23,7 +23,15 @@ def human_pause(a=1.0, b=2.5):
     time.sleep(a + random.random() * b)
 
 def login(page):
-    page.goto("https://www.linkedin.com/login", wait_until="networkidle")
+    for attempt in range(3):
+        try:
+            page.goto("https://www.linkedin.com/login", wait_until="networkidle", timeout=90000)
+            break
+        except Exception as e:
+            print(f"Login page load retry {attempt+1} failed: {e}")
+            if attempt == 2:
+                raise
+
     page.fill('input#username', EMAIL)
     page.fill('input#password', PASSWORD)
     page.click('button[type="submit"]')
@@ -34,7 +42,16 @@ def search_job_links(page, keyword, location, max_links=20):
     q = keyword.strip().replace(" ", "%20")
     url = f"https://www.linkedin.com/jobs/search/?keywords={q}&location={location.replace(' ', '%20')}&f_AL=true&f_TPR=r86400"
     print(f"\n🔎 Searching jobs: {keyword} in {location}")
-    page.goto(url, wait_until="networkidle")
+
+    for attempt in range(3):
+        try:
+            page.goto(url, wait_until="networkidle", timeout=90000)
+            break
+        except Exception as e:
+            print(f"Search page load retry {attempt+1} failed: {e}")
+            if attempt == 2:
+                raise
+
     human_pause(1.5, 2.5)
 
     anchors = page.query_selector_all("a[href*='/jobs/view/']")
@@ -51,7 +68,16 @@ def search_job_links(page, keyword, location, max_links=20):
 
 def try_easy_apply(page, job_url):
     print("➡️ Visiting", job_url)
-    page.goto(job_url, wait_until="networkidle")
+
+    for attempt in range(3):
+        try:
+            page.goto(job_url, wait_until="networkidle", timeout=90000)
+            break
+        except Exception as e:
+            print(f"Job page load retry {attempt+1} failed: {e}")
+            if attempt == 2:
+                raise
+
     human_pause(1.0, 2.0)
 
     try:
@@ -137,4 +163,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
